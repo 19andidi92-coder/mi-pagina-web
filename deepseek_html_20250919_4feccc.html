@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Especial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #5d4037;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .flower {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            z-index: -1;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        h1 {
+            color: #d32f2f;
+            margin-bottom: 20px;
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 10px;
+        }
+        
+        .heart {
+            color: #d32f2f;
+            font-size: 40px;
+            margin: 20px 0;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .signature {
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 18px;
+            color: #5d4037;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-hearts span {
+            position: absolute;
+            color: #ff9a9e;
+            font-size: 20px;
+            animation: floatHeart 10s infinite linear;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="hearts"></div>
+    
+    <div class="container">
+        <h1>Para Mi Esposa Amada</h1>
+        
+        <div class="heart">
+            <i class="fas fa-heart"></i>
+        </div>
+        
+        <p class="message">
+            Cada día a tu lado es un regalo del destino. Eres la luz que ilumina mi vida, 
+            la sonrisa que alegra mis mañanas y el amor que llena mi corazón. 
+            Hoy y siempre, quiero demostrarte lo especial que eres para mí.
+        </p>
+        
+        <div class="heart">
+            <i class="fas fa-heart"></i>
+        </div>
+        
+        <button class="btn" onclick="openDedication()">¿Quieres saber más?</button>
+        
+        <p class="signature">Con todo mi amor, para ti</p>
+    </div>
+    
+    <div class="footer">
+        Hecho con ❤️ para la mejor esposa del mundo
+    </div>
+
+    <script>
+        // Crear flores animadas
+        function createFlowers() {
+            const body = document.querySelector('body');
+            const flowers = ['🌸', '🌹', '🌺', '🌻', '🌷', '💐', '🥀'];
+            
+            for (let i = 0; i < 25; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+                
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                flower.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                
+                body.appendChild(flower);
+            }
+        }
+        
+        // Crear corazones flotantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('span');
+                heart.innerHTML = '❤️';
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Abrir página de dedicación
+        function openDedication() {
+            const dedicationPage = window.open('', '_blank');
+            
+            dedicationPage.document.write(`
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Dedicación Especial</title>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                    <style>
+                        body {
+                            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+                            color: #5d4037;
+                            min-height: 100vh;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            padding: 20px;
+                            text-align: center;
+                        }
+                        
+                        .container {
+                            background: rgba(255, 255, 255, 0.9);
+                            max-width: 800px;
+                            border-radius: 20px;
+                            padding: 40px;
+                            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+                        }
+                        
+                        h1 {
+                            color: #d32f2f;
+                            margin-bottom: 30px;
+                            font-size: 36px;
+                        }
+                        
+                        p {
+                            font-size: 20px;
+                            line-height: 1.6;
+                            margin-bottom: 20px;
+                        }
+                        
+                        .heart {
+                            color: #d32f2f;
+                            font-size: 40px;
+                            margin: 20px 0;
+                            animation: pulse 1.5s infinite;
+                        }
+                        
+                        @keyframes pulse {
+                            0% { transform: scale(1); }
+                            50% { transform: scale(1.2); }
+                            100% { transform: scale(1); }
+                        }
+                        
+                        .signature {
+                            font-style: italic;
+                            font-size: 22px;
+                            margin-top: 30px;
+                            font-weight: bold;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>Una Dedicación Especial Para Ti</h1>
+                        
+                        <div class="heart">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        
+                        <p>Querida esposa,</p>
+                        
+                        <p>Desde el momento en que entraste en mi vida, todo cobró sentido. Eres la razón por la que mis días están llenos de alegría y mis noches de paz.</p>
+                        
+                        <p>Tu sonrisa es mi mayor tesoro, tu amor mi mayor fortaleza. Cada momento a tu lado es un recordatorio de lo afortunado que soy por tenerte.</p>
+                        
+                        <p>Prometo amarte, respetarte y cuidarte todos los días de mi vida. Eres y serás siempre la mujer de mis sueños.</p>
+                        
+                        <div class="heart">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        
+                        <p class="signature">Para mi amada esposa, con todo mi amor</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            dedicationPage.document.close();
+        }
+        
+        // Inicializar animaciones
+        window.onload = function() {
+            createFlowers();
+            createHearts();
+        };
+    </script>
+</body>
+</html>
